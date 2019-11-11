@@ -4,42 +4,6 @@
 ||             19/09/2019             ||
 ++------------------------------------++
 
->>> ORIGINAL:
-
-IMEI (Slot1):
-354384090854563
-IMEI SL (Slot1):
-78
-
-IMEI (Slot2):
-354384090854571
-IMEI SL (Slot2):
-78
-
-MAC address:
-0c:8b:d3:ee:57:5f
-
-Serial number:
-FYH6BUYLAM89G6Z5
-
-Barcode:
-0293301832101167                                           110P
-
-USED FAKE IMEI 
-IMEI (Slot1):354384090854555
-IMEI (Slot2):354384090854548
-
-IMEI (Slot1):354384090854522
-IMEI (Slot2):354384090854530
-
-IMEI (Slot1):354384090854506
-IMEI (Slot2):354384090854514
-
-IMEI (Slot1):354384090854480
-IMEI (Slot2):354384090854498
-
-IMEI (Slot1):354384090854464
-IMEI (Slot2):354384090854472
 -----------------------------------------------------------
 >>> CHANGE PHONE PARAM (IMEI, SN,...) WITHOUT ROOTING
 
