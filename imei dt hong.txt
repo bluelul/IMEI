@@ -1,0 +1,122 @@
+﻿++------------------------------------++
+||              ITEL S12              ||
+||             lttung1197             ||
+||             19/09/2019             ||
+++------------------------------------++
+
+>>> ORIGINAL:
+
+IMEI (Slot1):
+354384090854563
+IMEI SL (Slot1):
+78
+
+IMEI (Slot2):
+354384090854571
+IMEI SL (Slot2):
+78
+
+MAC address:
+0c:8b:d3:ee:57:5f
+
+Serial number:
+FYH6BUYLAM89G6Z5
+
+Barcode:
+0293301832101167                                           110P
+
+USED FAKE IMEI 
+IMEI (Slot1):354384090854555
+IMEI (Slot2):354384090854548
+
+IMEI (Slot1):354384090854522
+IMEI (Slot2):354384090854530
+
+IMEI (Slot1):354384090854506
+IMEI (Slot2):354384090854514
+
+IMEI (Slot1):354384090854480
+IMEI (Slot2):354384090854498
+
+IMEI (Slot1):354384090854464
+IMEI (Slot2):354384090854472
+-----------------------------------------------------------
+>>> CHANGE PHONE PARAM (IMEI, SN,...) WITHOUT ROOTING
+
+Note: usable for MT6582, MT6572, MT6592, MT6589, MT6595 chip.
+Another way: MTK Droid Tools to manually enter IMEI numbers.
+http://www.gizbeat.com/6058/how-to-restore-fix-lost-imei-and-serial-numbers-for-mtk6582-mtk6572-mtk6592-mtk6589-mtk6595
+
+[1] Check SN is valid by dialing *#66#. If SN is not valid, we need to update SN first (by same app, too).
+	Original SN (Serial Number) can be found on the back of your phone.
+[2] Download NVRAM Database file (name begin with "BPLGU") of your chip. 
+    You can find an single file or included in Stock ROM of your phone.
+[3] Download and install VCOM MTK Driver (with your phone connected to PC) and Maui META Tool. 
+    VCOM Driver can be found on S12 Stock ROM folder, Maui META Tool is in TOOL folder.
+[4] Turn off your phone, remove the battery THEN replace it after some seconds (and don't turn on the phone).
+[5] Keeping Device Manager open and visible in the background, locate MauiMETA Program and Run as Administrator.
+[6] Click on [Options] in the menu bar, and select “Connect Smart phone into META mode”.
+[7] Click on [Reconnect]. Maui META will now ask you to “Please connect cable to target and then power on”.
+[8] Connect your phone into the computer via USB data cable, but DO NOT turn it on. 
+    Maui META will trigger the power up sequence. You should hear about 2 connect-disconnect sequence sounds from your PC.
+  [8.1] During the first connection to Maui META, your phone will boot partially while CDC VCOM Drivers are installed automatically. Wait for it to finish.
+  [8.2] After successful installation, you should see “Gadget CDC VCOM Driver (COMxx)” in Device Manager.
+  [8.3] Even if the installation was successful, Maui META may still be unable to connect to your phone. If this is the case, close Maui META and disconnect your phone. Shut your phone off manually. And retry again.
+[9] It is successful if you see the following:
+  [9.1] Your phone will appear in Device Manager as a Gadget CDC VCOM Driver (COMxx)
+  [9.2] Maui META indicates “Connected with Target” and shows your RF chip versions
+  [9.3] Your phone shows a static boot logo
+[10] Once your phone boots into META mode, a Get Version pop up window will appear. Ignore and close this window.
+[11] SN Update (only if SN is invalid)
+  [11.1] In the main Maui META window, click on the drop down menu and select Barcode Download.
+  [11.2] Click on “Change NVRAM Database” and select the NVRAM Database file that is suitable for your current ROM. Click Open.
+  [11.3] Type in the Serial Number you obtained from the back of the phone.
+  [11.4] Click on “Download to Flash”. Check the bottom of the window to see if the flash was successful.
+  [11.5] Close the Barcode Download window.
+[12] IMEI Update
+  [12.1] In the main Maui META window, click on the drop down menu and select IMEI Download.
+  [12.2] Click on “Change NVRAM Database” and select the NVRAM Database file that is suitable for your current ROM. Click Open.
+  [12.3] If your IMEI is still valid, you can load your IMEI by clicking Upload from Flash button.
+  [12.4] In the SIM1 tab, type in the IMEI for SIM1. (Note: the last number of the IMEI goes into the checksum box.)
+  [12.5] Click on SIM2 tab, and enter the IMEI for SIM2.
+  [12.6] Click on “Download to Flash”. Check the bottom of the window to see if the flash was successful.
+[13] Exiting META Mode
+  [13.1] Close all pop-up windows.
+  [13.2] Click on Disconnect, you should see a message saying “Please Standby”
+  [13.3] Wait for Gadget CDC VCOM Driver to disappear from Device Manager List.
+  [13.4] Wait for your phone to shutdown and enter charging mode.
+  [13.5] Close Maui META and disconnect your phone.
+[14] Power on your phone.
+
+-----------------------------------------------------------
+>>> HOW TO ROOT
+[1] Charged phone (50%), Backup data, Enable USB Debugging, Enable OEM Unlock (in Developer Mode).
+[1.1] Copy Magisk-v19.3.zip to sd card.
+[2] Install adb-setup-1.4.3, copy TWRP_i805-030818.img to C:/adb, rename to twrp.img, run cmd in C:/adb.
+[3] Connect phone to usb port
+[4] In cmd, run "adb reboot bootloader" (or run bootloader from recovery (power + volume up)).
+[5] Then, run "fastboot oem unlock".
+[5] Install TWRP by run "fastboot flash recovery twrp.img".
+[6] Run "fastboot reboot".
+[7] Install Magisk: Boot to recovery (TWRP) by (power + volume up) -> [Install] -> Browse to Magisk-v19.3.zip -> Confirm.
+[8] Done!
+-----------------------------------------------------------
+>>> MODIFY IMEI BY ADB:
+adb shell
+su
+//open supersu or magisk app to grant access for shell adb
+echo 'AT +EGMR=1,7,"354384090854555"'>/dev/radio/pttycmd1
+echo 'AT +EGMR=1,10,"354384090854548"'>/dev/radio/pttycmd1
+//setprop ro.serialno FYH6BUYLAM89G6Z6
+//echo -n "FYH6BUYLAM89G6Z6">/sys/class/android_usb/android0/iSerial
+reboot
+-----------------------------------------------------------
+>>> PRELOADER DA FLASH (UNBRICK):
+
+Use file: S12-I805-7.0-OP-V056-20180813.rar, extract.
+Install Driver_Auto_Installer_EXE_v5.1632.00
+Use SWDLoader.exe to Flash ROM.
+
+Turn off your phone, remove the battery THEN replace it after some seconds (and don't turn on the phone).
+Press F9 (or hit Download button) THEN connect your phone into the computer via USB data cable. 
+The process will start and a red progress bar will appear.
